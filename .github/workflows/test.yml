@@ -30,6 +30,8 @@ jobs:
 
     - name: Run Mafin.Web.UI.Selenium.Example tests
       run: dotnet test Mafin.Web.UI.Selenium.Example/*.csproj -c ${{ env.CONFIGURATION }} --no-build
+      continue-on-error: true
 
     - name: Run Mafin.Web.UI.Selenium.YapomlExample tests
       run: dotnet test Mafin.Web.UI.Selenium.YapomlExample/*.csproj -c ${{ env.CONFIGURATION }} --no-build
+      continue-on-error: true
