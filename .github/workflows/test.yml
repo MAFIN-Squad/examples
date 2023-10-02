@@ -28,5 +28,8 @@ jobs:
     - name: Build solution
       run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore
 
-    - name: Run tests
-      run: dotnet test -c ${{ env.CONFIGURATION }} --no-build
+    - name: Run Mafin.Web.UI.Selenium.Example tests
+      run: dotnet test Mafin.Web.UI.Selenium.Example/*.csproj -c ${{ env.CONFIGURATION }} --no-build
+
+    - name: Run Mafin.Web.UI.Selenium.YapomlExample tests
+      run: dotnet test Mafin.Web.UI.Selenium.YapomlExample/*.csproj -c ${{ env.CONFIGURATION }} --no-build
