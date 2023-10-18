@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DABEE7D9-74D7-4FAF-B688-8F7ABBDE8D60}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{CB8A64B0-00EA-4E45-A813-F01C85D9318E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{662421CA-0F8C-464E-93A3-BCF54421A236}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\test.yml = .github\workflows\test.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mafin.Web.UI.Selenium.Example", "Mafin.Web.UI.Selenium.Example\Mafin.Web.UI.Selenium.Example.csproj", "{56ED6617-BE7A-46B9-94B9-FF88F930DAFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mafin.Web.UI.Selenium.YapomlExample", "Mafin.Web.UI.Selenium.YapomlExample\Mafin.Web.UI.Selenium.YapomlExample.csproj", "{B58D0309-543D-457A-B6ED-DA2AADCE03D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56ED6617-BE7A-46B9-94B9-FF88F930DAFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56ED6617-BE7A-46B9-94B9-FF88F930DAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56ED6617-BE7A-46B9-94B9-FF88F930DAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56ED6617-BE7A-46B9-94B9-FF88F930DAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B58D0309-543D-457A-B6ED-DA2AADCE03D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B58D0309-543D-457A-B6ED-DA2AADCE03D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B58D0309-543D-457A-B6ED-DA2AADCE03D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B58D0309-543D-457A-B6ED-DA2AADCE03D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CB8A64B0-00EA-4E45-A813-F01C85D9318E} = {DABEE7D9-74D7-4FAF-B688-8F7ABBDE8D60}
+		{662421CA-0F8C-464E-93A3-BCF54421A236} = {CB8A64B0-00EA-4E45-A813-F01C85D9318E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8B7548B-B4CE-4A83-BD27-CDB642677955}
+	EndGlobalSection
+EndGlobal

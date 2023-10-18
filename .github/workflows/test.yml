@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+env:
+  CONFIGURATION: Release
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build solution
+      run: dotnet build -c ${{ env.CONFIGURATION }} --no-restore
+
+    - name: Run Mafin.Web.UI.Selenium.Example tests
+      run: dotnet test Mafin.Web.UI.Selenium.Example/*.csproj -c ${{ env.CONFIGURATION }} --no-build
+
+    - name: Run Mafin.Web.UI.Selenium.YapomlExample tests
+      run: dotnet test Mafin.Web.UI.Selenium.YapomlExample/*.csproj -c ${{ env.CONFIGURATION }} --no-build
+      if: success() || failure()
