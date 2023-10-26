@@ -26,13 +26,9 @@ public partial class BasePage
 
     partial class CookiesPaneComponent
     {
-        partial class Conditions
+        partial class Conditions<TSelf>
         {
-            public Conditions IsAnimated()
-            {
-                Styles["bottom"].Is("0px");
-                return this;
-            }
+            public TSelf IsAnimated() => Styles["bottom"].Is("0px");
         }
     }
 
