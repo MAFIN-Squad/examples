@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Mafin.Web.UI.Selenium.YapomlExample.Tests;
+namespace Mafin.Web.UI.Selenium.Example.Tests;
 
 public class ContactUsTests : AbstractTest
 {
@@ -34,6 +34,6 @@ public class ContactUsTests : AbstractTest
     {
         Ya.HomePage.Header.ContactUsButton.Click();
 
-        Assert.That(driver.Title, Is.EqualTo("Learn more about EPAM and Contact Us | EPAM"));
+        Assert.That(Driver.Title, Is.EqualTo("Learn more about EPAM and Contact Us | EPAM"));
     }
 }

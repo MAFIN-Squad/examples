@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mafin.Web.UI.Selenium.YapomlExample", "Mafin.Web.UI.Selenium.YapomlExample\Mafin.Web.UI.Selenium.YapomlExample.csproj", "{B58D0309-543D-457A-B6ED-DA2AADCE03D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mafin.Web.UI.Selenium.Example", "Mafin.Web.UI.Selenium.Example\Mafin.Web.UI.Selenium.Example.csproj", "{B58D0309-543D-457A-B6ED-DA2AADCE03D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

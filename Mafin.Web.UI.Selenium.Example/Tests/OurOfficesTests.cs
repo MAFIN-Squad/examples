@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Mafin.Web.UI.Selenium.YapomlExample.Tests;
+namespace Mafin.Web.UI.Selenium.Example.Tests;
 
 public class OurOfficesTests : AbstractTest
 {

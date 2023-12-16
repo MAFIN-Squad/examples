@@ -1,4 +1,4 @@
-namespace Mafin.Web.UI.Selenium.YapomlExample.Pages.Components;
+namespace Mafin.Web.UI.Selenium.Example.Pages.Components;
 
 public partial class MultiSelectionFilterListComponent<TComponent, TConditions, TCondition>
 {
@@ -18,7 +18,7 @@ public partial class MultiSelectionFilterListComponent<TComponent, TConditions, 
 
         Flyout.Expect(it => it.IsDisplayed());
 
-        foreach (var optionName in optionNames)
+        foreach (var optionName in optionNames ?? [])
         {
             Flyout.Option(optionName).Click();
         }
