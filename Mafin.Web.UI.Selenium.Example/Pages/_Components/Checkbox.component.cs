@@ -1,4 +1,4 @@
-namespace Mafin.Web.UI.Selenium.YapomlExample.Pages.Components;
+namespace Mafin.Web.UI.Selenium.Example.Pages.Components;
 
 public partial class CheckboxComponent<TComponent, TConditions, TCondition>
 {

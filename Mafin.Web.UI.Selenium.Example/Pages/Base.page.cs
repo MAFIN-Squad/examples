@@ -1,6 +1,6 @@
 using OpenQA.Selenium;
 
-namespace Mafin.Web.UI.Selenium.YapomlExample.Pages;
+namespace Mafin.Web.UI.Selenium.Example.Pages;
 
 public partial class BasePage
 {
@@ -24,17 +24,17 @@ public partial class BasePage
             .Click();
     }
 
-    partial class CookiesPaneComponent
+    public partial class CookiesPaneComponent
     {
-        partial class Conditions<TSelf>
+        public partial class Conditions<TSelf>
         {
             public TSelf IsAnimated() => Styles["bottom"].Is("0px");
         }
     }
 
-    partial class HeaderComponent
+    public partial class HeaderComponent
     {
-        partial class SearchComponent
+        public partial class SearchComponent
         {
             public SearchPage Search(string text, bool usingKeyboard = false)
             {

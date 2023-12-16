@@ -1,28 +1,17 @@
-using Mafin.Web.UI.Selenium.Example.Meta;
 using NUnit.Framework;
 
 namespace Mafin.Web.UI.Selenium.Example.Tests;
 
-public class FiltersTests : BaseEpamTest
+public class FiltersTests : AbstractTest
 {
     [Test]
     public void FilterContentOnTheInsightsPage()
     {
-        // prepare
-        const string expectedFilteringTag = "SOFTWARE & HI-TECH";
+        Ya.HomePage.Navigate("Insights");
 
-        // act
-        _navigationBar.NavigateToMenuItemByClick(NavigationMenu.Insights);
-        Assert.IsTrue(_insightsPage.IsOnPage(), "Verify that Insights page is opened");
-        _insightsPage.SelectIndustries("Software & Hi-Tech");
-        _actionsSteps.Click(_insightsPage.ApplyButton);
+        var insightsPage = Ya.Insights.InsightsPage;
+        insightsPage.Industry.Expect(it => it.IsDisplayed()).Select("Software & Hi-Tech");
 
-        var allResultsContainsTagText = _actionsSteps.GetElements(_insightsPage.IndustriesList)
-            .TrueForAll(ul =>
-                _actionsSteps.GetElements(ul, _insightsPage.IndustriesItem)
-                    .Exists(li => _actionsSteps.GetText(li).Contains(expectedFilteringTag, StringComparison.Ordinal)));
-
-        // verify
-        Assert.IsTrue(allResultsContainsTagText, "Verify that filtering is applied");
+        Assert.That(insightsPage.Tags.Select(t => t.Text), Is.EqualTo(new List<string> { "Software & Hi-Tech" }));
     }
 }

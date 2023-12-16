@@ -1,30 +1,21 @@
-using Mafin.Web.UI.Selenium.Example.Meta;
 using NUnit.Framework;
 
 namespace Mafin.Web.UI.Selenium.Example.Tests;
 
-public class OurOfficesTests : BaseEpamTest
+public class OurOfficesTests : AbstractTest
 {
     [Test]
     public void CheckBelarussianOffices()
     {
-        // prepare
-        const string tabToSelect = "EMEA";
-        const string officeToSelect = "BELARUS";
         var expectedOfficeList = new List<string> { "BREST", "GOMEL", "GRODNO", "MINSK", "MOGILEV", "VITEBSK" };
 
-        // act
-        _actionsSteps.Click(_homePage.ExploreOurClientWork);
-        Assert.IsTrue(_clientWorkPage.IsOnPage(), "Verify that ClientWork page is opened");
-        _clientWorkPage
-            .SelectTab(tabToSelect)
-            .SelectOffice(officeToSelect);
+        Ya.HomePage.ExploreOurClientsWork.Click();
 
-        // verify
-        Assert.IsTrue(_clientWorkPage.IsOnPage(), "Verify that OurWork page is still opened");
-        var actualOfficeName = _clientWorkPage.GetActiveOfficeCountryName();
-        Assert.AreEqual(officeToSelect, actualOfficeName, "Verify that active office is selected");
-        var actualOfficeNames = _clientWorkPage.GetActiveOfficeNames().Select(_actionsSteps.GetText).ToList();
-        Assert.AreEqual(expectedOfficeList, actualOfficeNames, "Verify that office lis is equal to expected");
+        var section = Ya.ClientWorkPage.OurOfficesSection;
+        section.Regions["EMEA"].Click();
+        section.Locations["BELARUS"].Click();
+        section.DetailsSection.Expect(it => it.IsDisplayed()).Offices[0].Expect(it => it.Name.Text.IsNot(string.Empty));
+
+        Assert.That(section.DetailsSection.Offices.Select(o => o.Name.Text), Is.EqualTo(expectedOfficeList));
     }
 }

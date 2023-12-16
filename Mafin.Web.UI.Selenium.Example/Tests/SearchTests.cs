@@ -1,52 +1,36 @@
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace Mafin.Web.UI.Selenium.Example.Tests;
 
-public class SearchTests : BaseEpamTest
+public class SearchTests : AbstractTest
 {
     [Test]
     public void SearchByWord()
     {
-        // prepare
-        const string textToFind = "RPA";
-        const string expectedPageTitle = "RPA Vs Cognitive Automation: Which Technology Will Drive IT Spends for CIOs? I EPAM";
+        var results = Ya.HomePage.Header.Search
+            .Search("RPA").Results;
 
-        // act
-        _actionsSteps.Click(_navigationBar.SearchIcon);
-        _actionsSteps.TypeText(_navigationBar.SearchInput, textToFind);
-        _actionsSteps.Click(_navigationBar.FindButton);
+        Assert.That(results.Count, Is.GreaterThan(0));
 
-        Assert.IsTrue(_searchPage.IsOnPage(), "Verify that Search page is opened");
-        var searchResults = _actionsSteps.GetElements(_searchPage.SearchResultsLinks);
-        Assert.IsTrue(searchResults.Any(), "Verify that Search results are present");
-        _actionsSteps.Click(searchResults[0]);
+        results[0].Title.Click();
 
-        // verify
-        var actualTitle = wdm.GetDriver().Title;
-        Assert.AreEqual(expectedPageTitle, actualTitle, "Verify that page title is equal to expected");
+        Assert.That(Driver.Title, Is.EqualTo("RPA Vs Cognitive Automation: Which Technology Will Drive IT Spends for CIOs? I EPAM"));
     }
 
     [Test]
     public void VerifyLeadershipPage()
     {
-        // prepare
-        const string textToFind = "About";
-        const string expectedName = "ARKADIY DOBKIN";
+        Ya.HomePage.Header.Search.Search("about", usingKeyboard: true)
+            .Results[0].Title.Click();
 
-        // act
-        _actionsSteps.Click(_navigationBar.SearchIcon);
-        _actionsSteps.TypeText(_navigationBar.SearchInput, textToFind);
-        _actionsSteps.SendKeys(Keys.Enter);
-        Assert.IsTrue(_searchPage.IsOnPage(), "Verify that Search page is opened");
-        _actionsSteps.ClickOnFirstInTheListByText(_searchPage.SearchResultsLinks, textToFind);
-        Assert.IsTrue(_aboutPage.IsOnPage(), "Verify that About page is opened");
-        _actionsSteps.Click(_aboutPage.SeeAllLeaderShipLink);
-        Assert.IsTrue(_leadershipPage.IsOnPage(), "Verify that Leadership page is opened");
+        Assert.That(Driver.Title, Is.EqualTo("One of the Fastest-Growing Public Tech Companies | About EPAM"));
 
-        // verify
-        var element = _actionsSteps.GetElements(_leadershipPage.Names)
-            .Find(e => e.Text.Replace("\r\n", " ", StringComparison.Ordinal).Equals(expectedName, StringComparison.OrdinalIgnoreCase));
-        Assert.IsNotNull(element, $"Verify that leadership name contains '{expectedName}'");
+        Ya.About.AboutPage.SeeAll.Click();
+
+        Assert.That(Driver.Title, Is.EqualTo("Leadership"));
+
+        var firstDirector = Ya.About.WhoWeAre.LeadershipPage.Directors[0];
+        Assert.That(firstDirector.Name.Firstname.Text, Is.EqualTo("Arkadiy"));
+        Assert.That(firstDirector.Name.Lastname.Text, Is.EqualTo("Dobkin"));
     }
 }
