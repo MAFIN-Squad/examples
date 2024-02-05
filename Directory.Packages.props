@@ -9,7 +9,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="NUnit" Version="4.0.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.18.0.83559" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.19.0.84025" />
     <PackageVersion Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
   </ItemGroup>
 </Project>
