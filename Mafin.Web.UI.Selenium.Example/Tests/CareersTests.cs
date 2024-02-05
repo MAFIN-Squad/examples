@@ -1,30 +1,24 @@
-using Mafin.Web.UI.Selenium.Example.Meta;
 using NUnit.Framework;
 
 namespace Mafin.Web.UI.Selenium.Example.Tests;
 
-public class CareersTests : BaseEpamTest
+public class CareersTests : AbstractTest
 {
     [Test]
     public void CheckSoftwareAndTestingEngineersPositions()
     {
-        // prepare
-        const int indexOfTheTargetItem = 1;
+        Ya.HomePage.Navigate("Careers");
 
-        // act
-        _navigationBar.NavigateToMenuItemByClick(NavigationMenu.Careers);
-        Assert.IsTrue(_careersPage.IsOnPage(), "Verify that Careers page is opened");
-        _careersPage.SelectSkills("Software, System, and Test Engineering");
-        _actionsSteps.Click(_careersPage.FindButton);
+        Ya.HomePage.Expect(that => that.Title.Is("Explore Professional Growth Opportunities | EPAM Careers"));
 
-        var item = _actionsSteps.FindElementInTheListByIndex(_careersPage.SearchResultItem, indexOfTheTargetItem);
-        var itemTitle = _actionsSteps.GetText(_actionsSteps.GetElement(item, _careersPage.SearchResultItemName));
-        var viewAndApplyItemButton = _actionsSteps.GetElement(item, _careersPage.SearchResultItemViewAndApplyButton);
-        _actionsSteps.Click(viewAndApplyItemButton);
+        Ya.Careers.CareersPage.JobFilter.Skill.Select("Software, System, and Test Engineering");
 
-        // verify
-        Assert.IsTrue(_jobListeningPage.IsOnPage(), "Verify that Job Listening page is opened");
-        var actualJobTitle = _actionsSteps.GetText(_jobListeningPage.ApplyForJobTitle);
-        Assert.AreEqual(itemTitle, actualJobTitle, "Verify that Job Title is equal to expected");
+        Ya.Careers.CareersPage.JobFilter.FindButton.Click();
+
+        var expectedItemName = Ya.Careers.JobListingPage.ResultItems[0].Name.Text;
+
+        Ya.Careers.JobListingPage.ResultItems[0].ViewAndApplyButton.Click();
+
+        Ya.Careers.JobDetailPage.ApplyFor.Name.Expect(that => that.Text.Is(expectedItemName));
     }
 }

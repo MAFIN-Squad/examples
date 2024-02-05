@@ -1,62 +1,39 @@
-using Mafin.Web.UI.Selenium.Example.Meta;
-using Mafin.Web.UI.Selenium.Example.Models;
 using NUnit.Framework;
 
 namespace Mafin.Web.UI.Selenium.Example.Tests;
 
-public class ContactUsTests : BaseEpamTest
+public class ContactUsTests : AbstractTest
 {
     [Test]
     public void FillInContactUsForm()
     {
-        // prepare
-        var contactForm = new ContactUsRequiredFieldsModel
-        {
-            Reason = "Careers",
-            FirstName = "TestFirstName",
-            LastName = "TestLastName",
-            Email = "testemail@test.com",
-            Phone = "1234567890",
-            Location = "Japan",
-            HowDidYouHearAboutEpam = "Worked at EPAM"
-        };
+        Ya.HomePage.Header.ContactUsButton.Click();
 
-        // act
-        _navigationBar.NavigateToMenuItemByClick(NavigationMenu.ContactUs);
-        _contactUsPage.FillMandatoryFields(contactForm);
-        _contactUsPage.GetCheckBoxes().ForEach(by =>
-        {
-            _actionsSteps.Click(by);
-        });
+        var contactUsPage = Ya.About.WhoWeAre.ContactPage;
 
-        // verify
-        Assert.Multiple(() =>
-        {
-            _contactUsPage.GetMandatoryFields().ForEach(by =>
-            {
-                var actualText = _actionsSteps.GetText(by);
-                Assert.IsNotEmpty(actualText, $"Verify that the field '{by}' is not empty");
-            });
-        });
-        Assert.Multiple(() =>
-        {
-            _contactUsPage.GetCheckBoxesInputs().ForEach(by =>
-            {
-                Assert.IsTrue(_actionsSteps.IsChecked(by), $"Verify that the checkbox '{by}' is checked");
-            });
-        });
+        contactUsPage.TheReasonForYourInquiry.Select("Careers");
+        contactUsPage.FirstName.Type("TestFirstName");
+        contactUsPage.LastName.Type("TestLastName");
+        contactUsPage.Email.Type("testemail@test.com");
+        contactUsPage.Phone.Type("1234567890");
+        contactUsPage.Location.Select("Japan");
+        contactUsPage.HowDidYouHearAboutEpam.Select("Worked at EPAM");
+        contactUsPage.Consent.Check();
+
+        Assert.That(contactUsPage.TheReasonForYourInquiry.SelectedOption, Is.EqualTo("Careers"));
+        Assert.That(contactUsPage.FirstName.Attributes.Value, Is.EqualTo("TestFirstName"));
+        Assert.That(contactUsPage.Email.Attributes.Value, Is.EqualTo("testemail@test.com"));
+        Assert.That(contactUsPage.Phone.Attributes.Value, Is.EqualTo("1234567890"));
+        Assert.That(contactUsPage.Location.SelectedOption, Is.EqualTo("Japan"));
+        Assert.That(contactUsPage.HowDidYouHearAboutEpam.SelectedOption, Is.EqualTo("Worked at EPAM"));
+        Assert.That(contactUsPage.Consent.IsChecked, Is.True);
     }
 
     [Test]
     public void GoToContactsFromServices()
     {
-        // prepare
-        _servicesPage.OpenPage();
+        Ya.HomePage.Header.ContactUsButton.Click();
 
-        // act
-        _actionsSteps.Click(_servicesPage.ContactUsButton);
-
-        // verify
-        Assert.IsTrue(_contactUsPage.IsOnPage(), "Verify that Contact Us page is opened");
+        Assert.That(Driver.Title, Is.EqualTo("Learn more about EPAM and Contact Us | EPAM"));
     }
 }
